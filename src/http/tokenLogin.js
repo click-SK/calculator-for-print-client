@@ -1,0 +1,1 @@
+export const AUTH_TOKEN = window.localStorage.getItem('S-F-P-token');

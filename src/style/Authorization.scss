@@ -1,0 +1,69 @@
+@import "./colors.scss";
+
+.auth_wrap {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth_form_block {
+    max-width: 640px;
+    width: 100%;
+    max-height: 720px;
+    height: 100%;
+    background-color: $white_color;
+    border-radius: 20px;
+}
+
+.auth_form_container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 0px 48px;
+    width: 100%;
+    gap: 44px;
+    height: 50%;
+}
+
+.auth_image_wrap {
+    svg {
+        width: 100%;
+    }
+}
+
+.auth_image {
+}
+
+.auth_input_block {
+  width: 100%;
+  max-height: 75px;
+  height: 100%;
+}
+
+.auth_input {
+  border-radius: 20px;
+  border: 1px solid $dark_color;
+  background: $white_color;
+  width: 100%;
+  height: 100%;
+  color: $orange_color;
+  padding-left: 20px;
+}
+
+.auth_form_button_block {
+    width: 100%;
+    max-height: 75px;
+    height: 100%;
+}
+
+.auth_form_button {
+  border-radius: 20px;
+  border: 1px solid $light_orange_color;
+  background: $orange_color;
+  color: $white_color;
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+}

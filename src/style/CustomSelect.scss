@@ -1,0 +1,62 @@
+@import './colors.scss';
+.select_container {
+    width: 170px;
+    height: 21px;
+    border-radius: 20px;
+    border: 1px solid $dark_color;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.select_item_container {
+    position: absolute;
+    background-color: $white_color;
+    border-radius: 20px;
+    border: 1px solid $dark_color;
+    display: flex;
+    flex-direction: column;
+    min-height: 115px;
+    justify-content: space-around;
+    z-index: 2;
+    top: 25px;
+    width: 170px;
+
+    p {
+        font-size: 16px;
+    }
+}
+
+.select_arrow_icon {
+
+}
+
+.select_arrow_icon_active {
+    rotate: -180deg;
+}
+
+//---------Action Select
+
+//---------Status Select
+
+.select_status_item {
+    border-radius: 20px;
+    margin: 5px 10px;
+    color: $white_color;
+    padding: 5px 0px;
+    text-align: center;
+}
+
+.select_status_new {
+    background: #55adff;
+}
+.select_status_progress {
+    background: #81ff55;
+}
+.select_status_tosend {
+    background: #f9d100;
+}
+.select_status_sell {
+    background: #f93c00;
+}

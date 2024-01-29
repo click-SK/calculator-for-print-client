@@ -1,0 +1,44 @@
+@import './colors.scss';
+
+.nav_panel_wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+}
+
+.nav_panel_container {
+    display: flex;
+    min-height: 100px;
+    height: 100%;
+    max-width: 1300px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $white_color;
+    border-radius: 20px;
+    box-shadow: 8px 4px 49px 1px rgba(0, 0, 0, 0.25);
+}
+
+.nav_panel_block {
+    width: 30%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+        color: $dark_color;
+        font-size: 40px;
+    }
+}
+
+.active_tab {
+    border-radius: 20px;
+    border: 1px solid $orange_color;
+    background: $white_color;
+    
+    p {
+        
+        color: $orange_color;
+    }
+}

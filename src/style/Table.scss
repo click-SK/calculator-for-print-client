@@ -1,0 +1,38 @@
+@import './colors.scss';
+//------- Table Header
+.table_header_wrap {
+    display: flex;
+    border-bottom: 1px solid $dark_color;
+}
+
+.table_header_item_id {
+    width: 10%;
+}
+
+.table_header_item {
+    width: 18%;
+}
+
+.header_item {
+    color: $dark_color;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.44px;
+}
+
+
+//--------- Table Item
+
+.table_item_wrap {
+    display: flex;
+}
+
+.table_item {
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid $dark_color;
+}
