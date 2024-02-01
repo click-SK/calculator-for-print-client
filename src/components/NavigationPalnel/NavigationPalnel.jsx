@@ -20,7 +20,7 @@ const NavigationPalnel = ({activeTab, setActiveTab}) => {
         <div className='nav_panel_wrap'>
             <div className='nav_panel_container'>
                 {tabsArray.map((item) => (
-                    <div className={`nav_panel_block ${item.name == activeTab ? 'active_tab' : ''}`}
+                    <div className={`nav_panel_block ${item.name == activeTab ? `active_tab active_tab_${item.id}` : ''}`}
                     key={item.id}
                     onClick={() => setActiveTab(item.name)}>
                         <p>{item.name}</p>

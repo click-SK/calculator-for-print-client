@@ -1,19 +1,23 @@
 import React, {useState} from 'react';
 import TableHeader from '../Table/TableHeader';
 import TableItem from '../Table/TableItem';
+import TableHeaderMiscalculations from '../Table/TableHeaderMiscalculations'
+import TableItemTableHeaderMiscalculations from '../Table/TableItemMiscalculations'
 const Orders = () => {
     const [ordersArray] = useState([
         {
             id: 1,
-            orderName: '100 чашок для школи',
-            productName: '100 чашок',
+            manager:'alex',
+            orderName: '300 чашок для школи',
+            productName: '300 чашок',
             orderPrice: 3000,
             costsPrice: 2700,
         },
         {
             id: 2,
-            orderName: '100 футболок для школи',
-            productName: '100 футболок',
+            manager:'ros',
+            orderName: '300 футболок для школи',
+            productName: '300 футболок',
             orderPrice: 6000,
             costsPrice: 5000,
         },
