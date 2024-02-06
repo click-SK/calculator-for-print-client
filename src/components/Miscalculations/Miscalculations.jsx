@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import TableHeader from '../Table/TableHeader';
 import TableItem from '../Table/TableItem';
+import '../../style/Miscalculations.scss'
+
 const Miscalculations = () => {
     const [miscalculationsArray] = useState([
         {
@@ -19,7 +21,7 @@ const Miscalculations = () => {
         },
     ]);
     return (
-        <div>
+        <div className='table_wrap'>
             <TableHeader/>
             {miscalculationsArray.map((item) => (
             <TableItem 

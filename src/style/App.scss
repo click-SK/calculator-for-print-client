@@ -1,9 +1,13 @@
 @import './colors.scss';
 
 .App {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
   text-align: center;
-  background-color: $light_grey_color;
-  height: 100vh;
+  // background-color: $light_grey_color;
+  // height: 100vh;
   padding: 0px 20px;
 }
 
@@ -32,6 +36,8 @@
 .App-link {
   color: #61dafb;
 }
+
+
 
 @keyframes App-logo-spin {
   from {

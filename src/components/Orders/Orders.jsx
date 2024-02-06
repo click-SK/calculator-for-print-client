@@ -23,7 +23,7 @@ const Orders = () => {
         },
     ]);
     return (
-        <div>
+        <div className='table_wrap'>
             <TableHeader/>
             {ordersArray.map((item) => (
             <TableItem data={item} key={item.id}/>

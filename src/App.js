@@ -18,8 +18,12 @@ function App() {
   const user = useSelector((state) => state.auth.data);
   const navigate = useNavigate();
   useEffect(() => {
-    if(user?.login) {
+    if(user?.isAdmin) {
       navigate("/admin-panel");
+    } else if (user && user?.isAdmin == false ) {
+      navigate("/manager-panel");
+    } else if (!user) {
+      navigate("/");
     }
   },[user])
 
@@ -30,9 +34,14 @@ function App() {
       <Routes>
       <Route path="*" element={<Page404 />} />
         {!user && <Route path="/" element={<Login/>} />}
-        {user?.login && (
+        {/* {user?.login && (
           <Route path="/admin-panel" element={<MainPage />} />
-        )}
+        )} */}
+        {user?.isAdmin ? 
+          <Route path="/admin-panel" element={<MainPage />} />
+          :
+          <Route path="/manager-panel" element={<MainPage />} />
+        }
       </Routes>
     </div>
   );
