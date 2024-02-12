@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import TableHeader from '../Table/TableHeader';
 import TableItem from '../Table/TableItem';
-import TableHeaderMiscalculations from '../Table/TableHeaderMiscalculations'
-import TableItemTableHeaderMiscalculations from '../Table/TableItemMiscalculations'
+import { useSelector } from 'react-redux';
+import TableHeaderAdmin from '../Table/TableHeaderAdmin';
+import TableItemAdmin from '../Table/TableItemAdmin';
+import { BASE_URL } from '../../http/BaseUrl';
+import axios from 'axios';
+
 const Orders = () => {
-    const [ordersArray] = useState([
+    const user = useSelector((state) => state.auth.data);
+    const [ordersArray, setOrdersArray] = useState([
         {
             id: 1,
             manager:'alex',
@@ -22,12 +27,39 @@ const Orders = () => {
             costsPrice: 5000,
         },
     ]);
+
+    useEffect(() => {
+        try {
+            axios.get(`${BASE_URL}/get-all-orders`)
+                .then(response => {
+                    console.log('Server response:', response);
+                    setOrdersArray(response.data)
+                })
+                .catch(error => {
+                    console.error('Error getting user data:', error);
+                });
+        } catch (error) {
+            console.error('Error creating user:', error);
+        }
+    }, []);
     return (
         <div className='table_wrap'>
+            {user?.isAdmin ?
+            <>
+            <TableHeaderAdmin/>
+            {ordersArray.map((item) => (
+            <TableItemAdmin data={item} key={item.id}/>
+            ))}
+            </>
+            :
+            <>
             <TableHeader/>
             {ordersArray.map((item) => (
             <TableItem data={item} key={item.id}/>
             ))}
+            </>
+            }
+
         </div>
     );
 };

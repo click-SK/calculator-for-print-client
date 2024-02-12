@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ClientSelect from '../Template/ClientSelect';
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from '../../http/BaseUrl';
 
-const Calculator = () => {
+const Calculator = ({setActiveTab}) => {
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.data);
     const [isOpen, setIsOpen] = useState(false);
     const [currentClient, setCurrentClient] = useState(null)
     const [clientName, setClientName] = useState('');
@@ -104,7 +109,7 @@ const Calculator = () => {
             const dataToSend = {
                 clientId: currentClient,
                 orderName:nameOrder,
-                count: count,
+                counts: count,
                 productName: {
                     title: productName,
                     sum: productCost,
@@ -120,9 +125,9 @@ const Calculator = () => {
                     sum: designCost,
                     comment: designComment
                 },
-                select: {
-                    name: selectName,
-                    cost: selectCost,
+                branding: {
+                    title: selectName,
+                    sum: selectCost,
                     comment: selectComment
                 },
                 aditionalRows: rows.map(row => ({
@@ -141,7 +146,10 @@ const Calculator = () => {
             // console.log('Response from backend2:', dataToSend);
             const response = await axios.post(`${BASE_URL}/create-calculation`, dataToSend);
             console.log('Response from backend:', response.data);
-            
+            if(response.status === 200){
+                alert('Прорахунок збережений')
+                window.location.reload()
+            }
         } catch (error) {
             console.error('Error saving data:', error);
         }
@@ -266,7 +274,9 @@ const Calculator = () => {
                     </div>
             </div>
             <div className='btn_wrap_calc'>
-            <button>Відмінити</button>
+            <button onClick={() => setActiveTab('Прорахунки')}>
+                Відмінити
+            </button>
             <button className='btn_prime' onClick={handleSave}>Зберегти</button>
             </div>
         </div>

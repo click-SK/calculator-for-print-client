@@ -8,7 +8,7 @@ import AdminProfileSetings from '../AdminProfile/AdminProfileSetings';
 
 const MainPage = () => {
     const user = useSelector((state) => state.auth.data);
-    const [activeTab, setActiveTab] = useState('Профіль');
+    const [activeTab, setActiveTab] = useState('Прорахунки');
     console.log('activeTab',activeTab);
     return (
         <>
@@ -22,7 +22,9 @@ const MainPage = () => {
             <Orders/>
             }
             {activeTab == 'Калькулятор' && 
-            <Calculator/>
+            <Calculator
+            setActiveTab={setActiveTab}
+            />
             }
             {activeTab == 'Профіль' && 
             <AdminProfileSetings/>

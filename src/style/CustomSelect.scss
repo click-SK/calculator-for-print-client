@@ -7,7 +7,10 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
+    svg{
+        color: $white_color;
+    }
 }
 
 .select_item_container {
@@ -39,6 +42,15 @@
 //---------Action Select
 
 //---------Status Select
+
+.select_current_status_item{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 20px;
+    color: $white_color;
+}
 
 .select_status_item {
     border-radius: 20px;

@@ -9,11 +9,15 @@ import './style/CustomSelect.scss';
 import './style/Calculator.scss';
 import Login from './components/Authorization/Login';
 import FirstRequest from './components/FirstRequest';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import MainPage from './components/MainPage/MainPage';
 import Page404 from './components/Page404';
-import { useNavigate } from 'react-router-dom';
+import EditMiscalculation from './components/Calculator/EditMiscalculation';
+import AddToOrderCalculation from './components/Calculator/AddToOrderCalculation';
+import EditOrder from './components/Calculator/EditOrder';
+// import { useNavigate } from 'react-router-dom';
+
 function App() {
   const user = useSelector((state) => state.auth.data);
   const navigate = useNavigate();
@@ -42,6 +46,15 @@ function App() {
           :
           <Route path="/manager-panel" element={<MainPage />} />
         }
+        {user && (
+          <Route path="/edit/:id" element={<EditMiscalculation />} />
+        )}
+        {user && (
+          <Route path="/to-order/:id" element={<AddToOrderCalculation />} />
+        )}
+        {user && (
+          <Route path="/edit-order/:id" element={<EditOrder />} />
+        )}
       </Routes>
     </div>
   );
