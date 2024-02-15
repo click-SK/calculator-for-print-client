@@ -7,14 +7,14 @@ import CustomStatusSelect from '../Template/CustomStatusSelect';
 import { useSelector } from 'react-redux';
 const TableItem = ({ data, selectType }) => {
     const user = useSelector((state) => state.auth.data);
-    // console.log('data', data);
+
     return (
         <div className='table_item_wrap'>
-            <p className='table_header_item_id table_item'>{data._id}</p>
-            <p className='table_header_item table_item'>{data.orderName}</p>
+            <p className='table_header_item_id table_item'>{data?.id}</p>
             <p className='table_header_item table_item'>{data.productName.title}</p>
+            <p className='table_header_item table_item'>{data.salePrice}</p>
             <p className='table_header_item table_item'>{data.costPrice}</p>
-            <p className='table_header_item table_item'>{data.salesAmountWithMarkup}</p>
+            <p className='table_header_item table_item'>{data.margin}</p>
             <div className='table_header_item table_item'>
                 {selectType == 'action'
                     ?

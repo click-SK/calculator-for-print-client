@@ -6,6 +6,8 @@
 
 .table_header_wrap {
     display: flex;
+    align-items: center;
+    padding: 10px 0;
     border-bottom: 1px solid $dark_color;
 }
 
@@ -15,6 +17,8 @@
 
 .table_header_item {
     width: 18%;
+    width: 17%;
+    margin-right: 5px;
 }
 
 .header_item {
@@ -26,6 +30,15 @@
     letter-spacing: -0.44px;
 }
 
+.header_item_status{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table_item_manage_wrap{
+    width: 20%;
+}
 
 //--------- Table Item
 

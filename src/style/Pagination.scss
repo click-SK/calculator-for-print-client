@@ -1,0 +1,15 @@
+@import './colors.scss';
+
+
+.pagination-controls{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 50px;
+    select{
+        width: 100px;
+        text-align: center;
+        border-radius: 8px;
+        border: 1px solid #adadad;
+    }
+}

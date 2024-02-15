@@ -2,33 +2,31 @@ import React, { useState, useEffect } from 'react';
 import '../../style/popUp.scss';
 import axios from "axios";
 import { BASE_URL } from '../../http/BaseUrl';
+import SearchQuery from './SearchQuery'
+import Pagination from './Pagination';
 
 const ClientSelect = ({ setIsOpen, currentClient, setCurrentClient }) => {
-    const [clients, setClients] = useState([
-        // {
-        //     pib: 'Kush Olex O.',
-        //     company: 'Nexus',
-        //     mail: 'ale@g.com',
-        //     phone: '03773991023'
-        // },
-        // {
-        //     pib: 'ROS',
-        //     company: 'LAb',
-        //     mail: 'ros@g.com',
-        //     phone: '77 777 777 7'
-        // },
-    ]);
+    const [clients, setClients] = useState([ ]);
     const [editClientId, setEditClientId] = useState(null);
     const [viewClientId, setViewClientId] = useState(null);
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [perPage, setPerPage] = useState(5);
+    const [total, setTotal] = useState(0);
+    const [searchQuery, setSearchQuery] = useState("");
 
     
     useEffect(() => {
         try {
-            axios.get(`${BASE_URL}/get-all-clients`)
+            axios.get(`${BASE_URL}/get-all-clients`,{
+                params:{
+                    page:'1',
+                    limit:'10',
+                    search: searchQuery
+                }
+            })
                 .then(response => {
                     console.log('Server response:', response);
-                    setClients(response.data);
+                    setClients(response.data.list);
                 })
                 .catch(error => {
                     console.error('Error getting user data:', error);
@@ -36,7 +34,7 @@ const ClientSelect = ({ setIsOpen, currentClient, setCurrentClient }) => {
         } catch (error) {
             console.error('Error creating user:', error);
         }
-    }, []);
+    }, [searchQuery]);
 
     const handleEditClick = (idx) => {
         setEditClientId(idx);
@@ -48,9 +46,6 @@ const ClientSelect = ({ setIsOpen, currentClient, setCurrentClient }) => {
         setEditClientId(null);
     };
 
-    // const handleSave = () => {
-    //     setEditClientId(null);
-    // };
 
     const handleSave = async () => {
         const clientToUpdate = clients[editClientId];
@@ -88,6 +83,12 @@ const ClientSelect = ({ setIsOpen, currentClient, setCurrentClient }) => {
                     <h2>List of partner </h2>
                     <button onClick={() => setIsOpen(false)}>X</button>
                 </div>
+                <SearchQuery
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                placeHolder={'Пошук...'}
+                type={'text'}
+                />
                 <div className='client_list_wrap'>
                     {clients.map((item, idx) => (
                         <div key={idx} className='client_list_item_wrap' >
@@ -131,6 +132,13 @@ const ClientSelect = ({ setIsOpen, currentClient, setCurrentClient }) => {
                         </div>
                     ))}
                 </div>
+                <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                ordersPerPage={perPage}
+                setOrdersPerPage={setPerPage}
+                totalOrders={total}
+                />
             </div>
         </div>
     );

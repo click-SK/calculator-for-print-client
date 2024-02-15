@@ -7,6 +7,8 @@ import './style/Miscalculations.scss';
 import './style/Table.scss';
 import './style/CustomSelect.scss';
 import './style/Calculator.scss';
+import './style/Pagination.scss';
+import './style/SearchQuery.scss';
 import Login from './components/Authorization/Login';
 import FirstRequest from './components/FirstRequest';
 import { Route, Routes, useNavigate } from "react-router-dom";

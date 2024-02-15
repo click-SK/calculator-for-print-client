@@ -86,11 +86,11 @@ const EditMiscalculation = () => {
     setMargin(calculationData?.margin);
     setPriceFackt(calculationData?.salePrice);
 
-    setClientId(calculationData?.clientId._id);
-    setClientName(calculationData?.clientId.fullName);
-    setClientCompany(calculationData?.clientId.company);
-    setClientMail(calculationData?.clientId.email);
-    setClientPhone(calculationData?.clientId.phone);
+    setClientId(calculationData?.clientId?._id);
+    setClientName(calculationData?.clientId?.fullName);
+    setClientCompany(calculationData?.clientId?.company);
+    setClientMail(calculationData?.clientId?.email);
+    setClientPhone(calculationData?.clientId?.phone);
   }, [calculationData]);
 
   const handleAddRow = () => {
