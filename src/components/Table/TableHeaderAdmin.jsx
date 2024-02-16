@@ -11,6 +11,8 @@ const TableHeaderAdmin = ({style, optionStatus, setOptionStatus, setOptionManage
         setOptionStatus(newStatus)
     }
 
+
+
     return (
         <div className='table_header_wrap'>
             <p className='table_header_item_id header_item'>№</p>
