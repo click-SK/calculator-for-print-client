@@ -47,7 +47,6 @@ const TableItemAdmin = ({ data, selectType }) => {
         return [r, g, b];
     }
 
-    console.log('data22', data);
 
     return (
         <div className='table_item_wrap'>

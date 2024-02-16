@@ -24,17 +24,32 @@ const Orders = () => {
     )
 
     const fetchOrders = async () => {
+        
         try {
-            const response = await axios.get(`${BASE_URL}/get-all-orders`, {
-                params: {
-                    page: currentPage,
-                    limit: ordersPerPage,
-                    search: searchQuery,
-                },
-            });
-            console.log('response', response);
-            setOrdersArray(response.data.list);
-            setTotalOrders(response.data.pagination.pageCount);
+            if(user.isAdmin){
+                const response = await axios.get(`${BASE_URL}/get-all-orders`, {
+                    params: {
+                        page: currentPage,
+                        limit: ordersPerPage,
+                        search: searchQuery,
+                    },
+                });
+                console.log('response', response);
+                setOrdersArray(response.data.list);
+                setTotalOrders(response.data.pagination.pageCount);
+            } else {
+                const response = await axios.get(`${BASE_URL}/sort-by-manager`, {
+                    params: {
+                        page: currentPage,
+                        limit: ordersPerPage,
+                        manager: user._id,
+                    },
+                });
+                console.log('response', response);
+                setOrdersArray(response.data?.list);
+                setTotalOrders(response.data?.pagination?.pageCount);
+            }
+            
         } catch (error) {
             console.error('Error fetching orders:', error);
         }
@@ -47,16 +62,32 @@ const Orders = () => {
 
     const fetchOrdersStatus = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/sort-by-status`, {
-                params: {
-                    page: currentPage,
-                    limit: ordersPerPage,
-                    status: optionStatus,
-                },
-            });
-            console.log('response', response);
-            setOrdersArray(response.data?.list);
-            setTotalOrders(response.data?.pagination?.pageCount);
+            if(user.isAdmin){
+                const response = await axios.get(`${BASE_URL}/sort-by-status`, {
+                    params: {
+                        page: currentPage,
+                        limit: ordersPerPage,
+                        status: optionStatus,
+                        
+                    },
+                });
+                console.log('response', response);
+                setOrdersArray(response.data?.list);
+                setTotalOrders(response.data?.pagination?.pageCount);
+            }else {
+                const response = await axios.get(`${BASE_URL}/sort-by-status-for-manager`, {
+                    params: {
+                        page: currentPage,
+                        limit: ordersPerPage,
+                        status: optionStatus,
+                        managerId: user._id
+                    },
+                });
+                console.log('response222', response);
+                setOrdersArray(response.data?.list);
+                setTotalOrders(response.data?.pagination?.pageCount);
+            }
+
         } catch (error) {
             console.error('Error fetching orders:', error);
         }
@@ -70,13 +101,14 @@ const Orders = () => {
                     manager: optionManager,
                 },
             });
-            console.log('response', response);
+            // console.log('response', response);
             setOrdersArray(response.data?.list);
             setTotalOrders(response.data?.pagination?.pageCount);
         } catch (error) {
             console.error('Error fetching orders:', error);
         }
     };
+
 
     useEffect(() => {
         if (isFirstLoad.current) {
@@ -116,7 +148,12 @@ const Orders = () => {
             </>
             :
             <>
-            <TableHeader/>
+            <TableHeader
+            setOptionStatus={setOptionStatus}
+            optionStatus={optionStatus}
+            optionManager={optionManager}
+            setOptionManager={setOptionManager}
+            />
             {ordersArray.map((item) => (
             <TableItemManagerOrder data={item} key={item.id}/>
             ))}

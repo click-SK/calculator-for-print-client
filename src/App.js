@@ -12,17 +12,20 @@ import './style/SearchQuery.scss';
 import Login from './components/Authorization/Login';
 import FirstRequest from './components/FirstRequest';
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
 import MainPage from './components/MainPage/MainPage';
 import Page404 from './components/Page404';
 import EditMiscalculation from './components/Calculator/EditMiscalculation';
 import AddToOrderCalculation from './components/Calculator/AddToOrderCalculation';
 import EditOrder from './components/Calculator/EditOrder';
+import { logout } from './store/auth';
 // import { useNavigate } from 'react-router-dom';
 
 function App() {
   const user = useSelector((state) => state.auth.data);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if(user?.isAdmin) {
       navigate("/admin-panel");
@@ -32,6 +35,12 @@ function App() {
       navigate("/");
     }
   },[user])
+
+  const handleLogout = () => {
+    window.localStorage.removeItem('S-F-P-token'); 
+    dispatch(logout());
+    navigate("/");
+  };
 
   console.log('user',user);
   return (
@@ -58,6 +67,9 @@ function App() {
           <Route path="/edit-order/:id" element={<EditOrder />} />
         )}
       </Routes>
+      <div className='log_out_btn_wrap'>
+        <button onClick={handleLogout}>Вийти</button>
+      </div>
     </div>
   );
 }
