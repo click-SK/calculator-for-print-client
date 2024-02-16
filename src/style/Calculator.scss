@@ -1,31 +1,247 @@
-.calculator_wrap {
+@import './colors.scss';
 
+.calculator_wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1400px;
+    gap: 50px;
 }
 
 .calculator_chose_client_block {
+    display: flex;
+    width: 100%;
+    
+    // align-items: center;
+    justify-content: space-between;
+    // margin: 40px 0;
+    margin-top: 50px;
+    button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2px 10px;
+        border-radius: 10px;
+        font-size: 30px;
+        // min-width: 60px;
+        color: $orange_color;
+        border: 1px solid $orange_color;
+        background: transparent;
+        transition: all 0.2s ease-in-out;
 
+        &:hover{
+            background: $orange_color;
+            color: $white_color;
+        }
+    }
+}
+
+.btn_choose_client{
+    width: 300px;
+}
+
+.client_block_select{
+    display: flex;
+    gap: 50px;
+    height: 60px;
+    width: 50%;
+}
+
+.client_block_curent{
+    display: flex;
+    flex-direction: column;
+    // width: 50%;
+    width: 100%;
+    gap: 5px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 8px 4px 49px 1px rgba(0, 0, 0, 0.25);
+    background-color: $white_color;
+    input{
+        background: transparent;
+        padding: 5px 10px;
+        font-size: 30px;
+        color: $orange_color;
+    }
+
+    .btn_resr_data{
+        margin-top: 10px;
+        padding: 8px 10px;
+    }
 }
 
 .calculator_name_block {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+    
+    input{
+        background: transparent;
+        padding: 5px 10px;
+        font-size: 30px;
+        color: $orange_color;
+        border-radius: 10px;
+        padding: 10px 20px;
+        box-shadow: 8px 4px 49px 1px rgba(0, 0, 0, 0.25);
+        background-color: $white_color;
+    }
+}
 
+.calculator_name_input{
+    width: 100%;
+}
+
+.calculator_name_quer{
+    width: 200px ;
 }
 
 .calculator_main_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 8px 4px 49px 1px rgba(0, 0, 0, 0.25);
+    background-color: $white_color;
+}
+
+.calculator_container_header{
+    display: flex;
+    h2{
+        display: flex;
+        width: 33%;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        color: $dark_color;
+        padding: 10px 0;
+        border-bottom: 1px solid $dark_color;
+    }
+    h2:nth-child(2) {
+        border: 1px solid $dark_color;
+        border-top: 0px;
+    }
+}
+
+.calculator_container_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2px 10px;
+        border-radius: 10px;
+        font-size: 30px;
+        min-width: 60px;
+        width: 300px;
+        margin-top: 20px;
+        color: $orange_color;
+        border: 1px solid $orange_color;
+        background: transparent;
+        transition: all 0.2s ease-in-out;
+
+        &:hover{
+            background: $orange_color;
+            color: $white_color;
+        }
+    }
 
 }
 
-.calculator_add_row {
-
-}
-
-.calculator_bottom_block {
-
-}
-
-.calculator_bottom_block_first {
+.calculator_body_row{
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid $dark_color;
     
 }
 
-.calculator_bottom_block_second {
+.calculator_body_row_item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    padding: 20px;
+    width: 33%;
+    max-height: 200px;
+    
+}
+
+.calculator_body_row_item:nth-child(2) {
+    border-left: 1px solid $dark_color;
+    border-right: 1px solid $dark_color;
+    border-top: 0px;
+}
+
+
+
+// .calculator_container_body:last-child {
+//     border-bottom: 1px solid transparent; /* Виправлено для узгодження з вашим запитом, щоб не було бордера в останнього елемента */
+// }
+
+
+
+.calculator_bottom_block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+
+    input{
+        background: transparent;
+        padding: 5px 10px;
+        font-size: 30px;
+        // width: 33%;
+        color: $orange_color;
+        border-radius: 10px;
+        padding: 10px 20px;
+        box-shadow: 8px 4px 49px 1px rgba(0, 0, 0, 0.25);
+        background-color: $white_color;
+    }
+}
+
+.btn_wrap_calc{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 100px;
+    gap: 50px;
+    button{
+        width: 30%;
+    }
+    .btn_prime{
+        background: $orange_color;
+        color: $white_color;
+        width: 55%;
+        &:hover{
+            background: transparent;
+            border: 1px solid $orange_color ;
+            color: $orange_color;
+        }
+    }
+}
+
+.calculator_bottom_block_item{
+    position: relative;
+    input{
+
+    }
+    label{
+        position: absolute;
+        color: $orange_color;
+        font-size: 20px;
+        top: -20px;
+        left: 20px;
+        opacity: 0;
+        background: #fff;
+        padding: 4px 5px;
+        border-radius: 4px;
+        border: 1px solid $orange_color;
+        transition: all 0.2s ease-in-out;
+    }
 
 }

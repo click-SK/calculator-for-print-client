@@ -3,11 +3,15 @@ import NavigationPalnel from '../NavigationPalnel/NavigationPalnel';
 import Calculator from '../Calculator/Calculator';
 import Miscalculations from '../Miscalculations/Miscalculations';
 import Orders from '../Orders/Orders';
+import { useSelector } from 'react-redux';
+import AdminProfileSetings from '../AdminProfile/AdminProfileSetings';
+
 const MainPage = () => {
-    const [activeTab, setActiveTab] = useState('Замовлення');
+    const user = useSelector((state) => state.auth.data);
+    const [activeTab, setActiveTab] = useState('Прорахунки');
     console.log('activeTab',activeTab);
     return (
-        <div>
+        <>
             <NavigationPalnel
             activeTab={activeTab}
             setActiveTab={setActiveTab}/>
@@ -18,9 +22,14 @@ const MainPage = () => {
             <Orders/>
             }
             {activeTab == 'Калькулятор' && 
-            <Calculator/>
+            <Calculator
+            setActiveTab={setActiveTab}
+            />
             }
-        </div>
+            {activeTab == 'Профіль' && 
+            <AdminProfileSetings/>
+            }
+        </>
     );
 };
 

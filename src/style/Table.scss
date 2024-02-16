@@ -1,7 +1,13 @@
 @import './colors.scss';
 //------- Table Header
+
+
+
+
 .table_header_wrap {
     display: flex;
+    align-items: center;
+    padding: 10px 0;
     border-bottom: 1px solid $dark_color;
 }
 
@@ -11,6 +17,8 @@
 
 .table_header_item {
     width: 18%;
+    width: 17%;
+    margin-right: 5px;
 }
 
 .header_item {
@@ -22,17 +30,63 @@
     letter-spacing: -0.44px;
 }
 
+.header_item_status{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table_item_manage_wrap{
+    width: 20%;
+}
 
 //--------- Table Item
 
 .table_item_wrap {
     display: flex;
+    position: relative;
+    .edit_icon{
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+        svg{
+            fill: $dark_color;
+            transition: all 0.3s ease-in-out;
+        }
+        &:hover{
+            svg{
+                fill: $orange_color;
+            }
+        }
+    }
 }
 
 .table_item {
     display: flex;
+
     min-height: 50px;
+    gap: 10px;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid $dark_color;
+    svg{
+        height: 20px;
+        width: 20px;
+        color: $dark_color;
+        transition: all 0.3s ease-in-out;
+        &:hover{
+             fill: $orange_color;
+        }
+    }
+
+}
+
+.table_item_manager{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    height: 80%;
+    width: 100%;
+    background-color: $dark_color;
 }
