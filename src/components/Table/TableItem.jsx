@@ -19,10 +19,10 @@ const TableItem = ({ data, selectType }) => {
                 {selectType == 'action'
                     ?
                     <>
-                        <Link to={`/edit/${data._id}`}>
-                            <BiSolidCommentEdit />
+                        <Link to={`/edit/${data._id}`} className='table_item_edit'>
+                            <BiSolidCommentEdit  />
                         </Link>
-                        <Link to={`/to-order/${data._id}`}>
+                        <Link to={`/to-order/${data._id}` } className='table_item_order' >
                             <MdSell />
                         </Link>
                         
