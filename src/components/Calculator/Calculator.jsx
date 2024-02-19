@@ -72,9 +72,11 @@ const Calculator = ({setActiveTab}) => {
             setPricePerPie(pricePerPieceWithMarkup.toFixed(2));
             setSum(sumWithMarg)
             if(priceFackt){
-                setMargin(priceFackt-costAmount)
+                const sum = (priceFackt-costAmount)
+                setMargin(sum.toFixed(2))
             } else {
-                setMargin(sumWithMarg-costAmount)
+                const sum = (sumWithMarg-costAmount)
+                setMargin(sum.toFixed(2))
             }
         }
 

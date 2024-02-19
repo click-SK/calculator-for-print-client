@@ -9,7 +9,7 @@ import SearchQuery from '../Template/SearchQuery';
 
 const Miscalculations = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [miscalculationsPerPage, setOrdersPerPage] = useState(5);
+    const [miscalculationsPerPage, setOrdersPerPage] = useState(50);
     const [totalMiscalculation, setTotalMiscalculatio] = useState(0);
     const [miscalculationsArray, setMiscalculationsArray] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");

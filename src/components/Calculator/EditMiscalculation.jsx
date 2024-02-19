@@ -135,11 +135,13 @@ const EditMiscalculation = () => {
 
       setPricePerPie(pricePerPieceWithMarkup.toFixed(2));
       setSum(sumWithMarg);
-      if (priceFackt) {
-        setMargin(priceFackt - costAmount);
-      } else {
-        setMargin(sumWithMarg - costAmount);
-      }
+      if(priceFackt){
+        const sum = (priceFackt-costAmount)
+        setMargin(sum.toFixed(2))
+    } else {
+        const sum = (sumWithMarg-costAmount)
+        setMargin(sum.toFixed(2))
+    }
     }
   }, [costAmount, priceMarkUp, count, sumMargin, priceFackt]);
 
