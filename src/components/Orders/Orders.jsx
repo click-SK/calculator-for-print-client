@@ -14,7 +14,7 @@ const Orders = () => {
     const user = useSelector((state) => state.auth.data);
     const isFirstLoad = useRef(true); 
     const [currentPage, setCurrentPage] = useState(1);
-    const [ordersPerPage, setOrdersPerPage] = useState(5);
+    const [ordersPerPage, setOrdersPerPage] = useState(50);
     const [ordersArray, setOrdersArray] = useState([]);
     const [totalOrders, setTotalOrders] = useState(0);
     const [searchQuery, setSearchQuery] = useState("");

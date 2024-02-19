@@ -88,11 +88,11 @@ const AddToOrderCalculation = () => {
       setMargin(calculationData?.margin);
       setPriceFackt(calculationData?.salePrice);
   
-      setClientId(calculationData?.clientId._id);
-      setClientName(calculationData?.clientId.fullName);
-      setClientCompany(calculationData?.clientId.company);
-      setClientMail(calculationData?.clientId.email);
-      setClientPhone(calculationData?.clientId.phone);
+      setClientId(calculationData?.clientId?._id);
+      setClientName(calculationData?.clientId?.fullName);
+      setClientCompany(calculationData?.clientId?.company);
+      setClientMail(calculationData?.clientId?.email);
+      setClientPhone(calculationData?.clientId?.phone);
     }, [calculationData]);
   
     const handleAddRow = () => {
@@ -135,10 +135,12 @@ const AddToOrderCalculation = () => {
   
         setPricePerPie(pricePerPieceWithMarkup.toFixed(2));
         setSum(sumWithMarg);
-        if (priceFackt) {
-          setMargin(priceFackt - costAmount);
+        if(priceFackt){
+          const sum = (priceFackt-costAmount)
+          setMargin(sum.toFixed(2))
         } else {
-          setMargin(sumWithMarg - costAmount);
+            const sum = (sumWithMarg-costAmount)
+            setMargin(sum.toFixed(2))
         }
       }
     }, [costAmount, priceMarkUp, count, sumMargin, priceFackt]);

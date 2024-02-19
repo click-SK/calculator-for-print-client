@@ -23,9 +23,9 @@ function Pagination({ currentPage, setCurrentPage, ordersPerPage, setOrdersPerPa
       <div className="pagination-controls">
         <button onClick={handlePreviousClick} disabled={currentPage === 1}>Попередня</button>
         <select onChange={handleOrdersPerPageChange} value={ordersPerPage}>
-          <option value="5">5</option>
-          <option value="10">10</option>
           <option value="50">50</option>
+          <option value="100">100</option>
+
         </select>
         <button onClick={handleNextClick}>Наступна</button>
       </div>
