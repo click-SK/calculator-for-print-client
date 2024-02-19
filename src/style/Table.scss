@@ -17,8 +17,8 @@
 
 .table_header_item {
     width: 18%;
-    width: 17%;
-    margin-right: 5px;
+    // width: 17%;
+    // margin-right: 5px;
 }
 
 .header_item {
@@ -80,6 +80,47 @@
     }
 
 }
+
+.table_item_edit{
+    position: relative;
+    &:hover{
+        &::after{
+            content: 'Редагувати';
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            border-radius: 8px;
+            left: -37px;
+            top: -21px;
+            width: 100px;
+            height: 20px;
+            border: 1px solid $dark_color;
+            background: $white_color;
+            color: $orange_color;
+        }
+    }
+}
+
+.table_item_order{
+    position: relative;
+    &:hover{
+        &::after{
+            content: 'В замовлення';
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            border-radius: 8px;
+            left: -37px;
+            top: -21px;
+            width: 100px;
+            height: 20px;
+            border: 1px solid $dark_color;
+            background: $white_color;
+            color: $orange_color;
+        }
+    }
+}
+
 
 .table_item_manager{
     display: flex;

@@ -54,3 +54,12 @@
   display: flex;
   justify-content: flex-end;
 }
+
+
+.plus_order{
+  position: fixed;
+  top: 60%;
+  right: 8%;
+  background-color: $orange_color;
+  color: $white_color;
+}

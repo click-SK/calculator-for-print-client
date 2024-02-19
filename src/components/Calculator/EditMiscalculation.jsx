@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../http/BaseUrl";
+import { FaPlus } from "react-icons/fa6";
+
 
 const EditMiscalculation = () => {
   const navigate = useNavigate();
@@ -86,7 +88,7 @@ const EditMiscalculation = () => {
     setMargin(calculationData?.margin);
     setPriceFackt(calculationData?.salePrice);
 
-    setClientId(calculationData?.clientId?._id);
+    setClientId(calculationData?.clientId);
     setClientName(calculationData?.clientId?.fullName);
     setClientCompany(calculationData?.clientId?.company);
     setClientMail(calculationData?.clientId?.email);
@@ -167,7 +169,7 @@ const EditMiscalculation = () => {
     try {
       const dataToSend = {
         id: id,
-        clientId: clientId,
+        clientId: currentClient,
         orderName: nameOrder,
         counts: count,
         productName: {
@@ -218,6 +220,8 @@ const EditMiscalculation = () => {
   };
 
 
+  console.log('calculationData', clientId);
+
 
   return (
     <div className="calculator_wrap">
@@ -233,7 +237,7 @@ const EditMiscalculation = () => {
               setCurrentClient={setCurrentClient}
             />
           )}
-          <button onClick={handleCreateUser}>+</button>
+          <button onClick={handleCreateUser} ><FaPlus/></button>
         </div>
         <div className="client_block_curent">
           <input

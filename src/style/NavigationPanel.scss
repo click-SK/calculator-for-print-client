@@ -9,7 +9,7 @@
 
 .nav_panel_container {
     display: flex;
-    min-height: 100px;
+    min-height: 70px;
     // height: 100%;
     max-width: 1400px;
     width: 100%;
@@ -33,7 +33,7 @@
     transition: background 0.3s ease-in-out;
     p {
         color: $dark_color;
-        font-size: 40px;
+        font-size: 35px;
     }
     &:hover{
         background: #fcefec;

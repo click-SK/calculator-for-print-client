@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from '../../http/BaseUrl';
+import { FaPlus } from "react-icons/fa6";
 
 const Calculator = ({setActiveTab}) => {
     const navigate = useNavigate();
@@ -167,7 +168,7 @@ const Calculator = ({setActiveTab}) => {
                             setCurrentClient={setCurrentClient}
                         />
                     }
-                    <button onClick={handleCreateUser} >+</button>
+                    <button onClick={handleCreateUser} ><FaPlus/></button>
                 </div>
                 <div className='client_block_curent'>
                     <input type="text" placeholder='ПІБ' value={currentClient ? currentClient.fullName : clientName} onChange={(e) => setClientName(e.target.value)}/>

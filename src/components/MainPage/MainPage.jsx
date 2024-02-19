@@ -5,6 +5,8 @@ import Miscalculations from '../Miscalculations/Miscalculations';
 import Orders from '../Orders/Orders';
 import { useSelector } from 'react-redux';
 import AdminProfileSetings from '../AdminProfile/AdminProfileSetings';
+import { FaPlus } from "react-icons/fa6";
+
 
 const MainPage = () => {
     const user = useSelector((state) => state.auth.data);
@@ -16,10 +18,17 @@ const MainPage = () => {
             activeTab={activeTab}
             setActiveTab={setActiveTab}/>
             {activeTab == 'Прорахунки' && 
+            <>
             <Miscalculations/>
+            <button className='plus_order' onClick={() => setActiveTab('Калькулятор')}> <FaPlus /></button>
+            </>
+
             }
             {activeTab == 'Замовлення' && 
+            <> 
             <Orders/>
+            <button className='plus_order' onClick={() => setActiveTab('Калькулятор')}> <FaPlus /></button>
+            </>
             }
             {activeTab == 'Калькулятор' && 
             <Calculator

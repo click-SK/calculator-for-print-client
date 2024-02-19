@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../http/BaseUrl";
+import { FaPlus } from "react-icons/fa6";
+
 
 const EditOrder = () => {
     const navigate = useNavigate();
@@ -167,7 +169,7 @@ const EditOrder = () => {
       try {
         const dataToSend = {
           id: id,
-          clientId: clientId,
+          clientId: currentClient,
           orderName: nameOrder,
           counts: count,
           productName: {
@@ -233,7 +235,7 @@ const EditOrder = () => {
               setCurrentClient={setCurrentClient}
             />
           )}
-          <button onClick={handleCreateUser}>+</button>
+          <button onClick={handleCreateUser} ><FaPlus/></button>
         </div>
         <div className="client_block_curent">
           <input

@@ -51,7 +51,7 @@ const TableItemAdmin = ({ data, selectType }) => {
     return (
         <div className='table_item_wrap'>
             <p className='table_item edit_icon'>
-                        <Link to={`/edit-order/${data._id}`}>
+                        <Link to={`/edit-order/${data._id}`} className='table_item_edit'>
                             <BiSolidCommentEdit />
                         </Link>
                 </p>
