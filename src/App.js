@@ -18,6 +18,7 @@ import Page404 from './components/Page404';
 import EditMiscalculation from './components/Calculator/EditMiscalculation';
 import AddToOrderCalculation from './components/Calculator/AddToOrderCalculation';
 import EditOrder from './components/Calculator/EditOrder';
+import CopiMiscalculation from './components/Calculator/CopiMiscalculation';
 import { logout } from './store/auth';
 // import { useNavigate } from 'react-router-dom';
 
@@ -65,6 +66,9 @@ function App() {
         )}
         {user && (
           <Route path="/edit-order/:id" element={<EditOrder />} />
+        )}
+        {user && (
+          <Route path="/copy-calculation/:id" element={<CopiMiscalculation />} />
         )}
       </Routes>
       <div className='log_out_btn_wrap'>

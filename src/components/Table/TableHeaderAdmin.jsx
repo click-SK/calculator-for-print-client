@@ -24,7 +24,7 @@ const TableHeaderAdmin = ({style, optionStatus, setOptionStatus, setOptionManage
                     setCurrentStatus={setOptionManager}
                 />
             </div>
-            <p className='table_header_item header_item'>Продукт</p>
+            <p className='table_header_item header_item'>Назва</p>
             <p className='table_header_item header_item'>Ціна факт</p>
             <p className='table_header_item header_item'>Ціна Витрат</p>
             <p className='table_header_item header_item'>Маржа</p>

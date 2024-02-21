@@ -100,6 +100,25 @@
         }
     }
 }
+.table_item_copy{
+    position: relative;
+    &:hover{
+        &::after{
+            content: 'Копіювати';
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            border-radius: 8px;
+            left: -37px;
+            top: -21px;
+            width: 100px;
+            height: 20px;
+            border: 1px solid $dark_color;
+            background: $white_color;
+            color: $orange_color;
+        }
+    }
+}
 
 .table_item_order{
     position: relative;

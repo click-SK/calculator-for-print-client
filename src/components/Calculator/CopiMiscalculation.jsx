@@ -7,269 +7,263 @@ import axios from "axios";
 import { BASE_URL } from "../../http/BaseUrl";
 import { FaPlus } from "react-icons/fa6";
 
-
-const EditMiscalculation = () => {
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.data);
-  const { id } = useParams();
-  const [calculationData, setCalculationData] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentClient, setCurrentClient] = useState(null);
-  const [clientId, setClientId] = useState("");
-  const [clientName, setClientName] = useState("");
-  const [clientCompany, setClientCompany] = useState("");
-  const [clientMail, setClientMail] = useState("");
-  const [clientPhone, setClientPhone] = useState("");
-  const [nameOrder, setNameOrder] = useState("");
-  const [count, setCount] = useState(null);
-  const [productName, setProductName] = useState("");
-  const [productCost, setProductCost] = useState(null);
-  const [productComment, setProductComment] = useState("");
-  const [deliveryName, setDeliveryName] = useState("");
-  const [deliveryCost, setDeliveryCost] = useState(null);
-  const [deliveryComment, setDeliveryComment] = useState("");
-  const [designName, setDesignName] = useState("");
-  const [designCost, setDesignCost] = useState(null);
-  const [designComment, setDesignComment] = useState("");
-  const [selectName, setSelectName] = useState("Без брендування");
-  const [selectCost, setSelectCost] = useState(null);
-  const [selectComment, setSelectComment] = useState("");
-  const [costAmount, setCostAmount] = useState(null);
-  const [priceMarkUp, setPriceMarkUp] = useState(null);
-  const [pricePerPie, setPricePerPie] = useState(null);
-  const [sum, setSum] = useState(null);
-  const [sumMargin, setMargin] = useState(null);
-  const [priceFackt, setPriceFackt] = useState(null);
-  const [rows, setRows] = useState([]);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-
-  useEffect(() => {
-    const fetchCalculationData = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/get-one-calculation/${id}`
+const CopiMiscalculation = () => {
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.data);
+    const { id } = useParams();
+    const [calculationData, setCalculationData] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentClient, setCurrentClient] = useState(null);
+    const [clientId, setClientId] = useState("");
+    const [clientName, setClientName] = useState("");
+    const [clientCompany, setClientCompany] = useState("");
+    const [clientMail, setClientMail] = useState("");
+    const [clientPhone, setClientPhone] = useState("");
+    const [nameOrder, setNameOrder] = useState("");
+    const [count, setCount] = useState(null);
+    const [productName, setProductName] = useState("");
+    const [productCost, setProductCost] = useState(null);
+    const [productComment, setProductComment] = useState("");
+    const [deliveryName, setDeliveryName] = useState("");
+    const [deliveryCost, setDeliveryCost] = useState(null);
+    const [deliveryComment, setDeliveryComment] = useState("");
+    const [designName, setDesignName] = useState("");
+    const [designCost, setDesignCost] = useState(null);
+    const [designComment, setDesignComment] = useState("");
+    const [selectName, setSelectName] = useState("Без брендування");
+    const [selectCost, setSelectCost] = useState(null);
+    const [selectComment, setSelectComment] = useState("");
+    const [costAmount, setCostAmount] = useState(null);
+    const [priceMarkUp, setPriceMarkUp] = useState(null);
+    const [pricePerPie, setPricePerPie] = useState(null);
+    const [sum, setSum] = useState(null);
+    const [sumMargin, setMargin] = useState(null);
+    const [priceFackt, setPriceFackt] = useState(null);
+    const [rows, setRows] = useState([]);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+  
+    useEffect(() => {
+      const fetchCalculationData = async () => {
+        try {
+          const response = await axios.get(
+            `${BASE_URL}/get-one-calculation/${id}`
+          );
+          setCalculationData(response.data);
+        } catch (error) {
+          console.error("Error fetching calculation data:", error);
+        }
+      };
+  
+      fetchCalculationData();
+    }, [id]);
+  
+    useEffect(() => {
+      setNameOrder(calculationData?.orderName);
+      setCount(calculationData?.counts);
+      setProductName(calculationData?.productName.title);
+      setProductCost(calculationData?.productName.sum);
+      setProductComment(calculationData?.productName.comment);
+      setDeliveryName(calculationData?.delivery.title);
+      setDeliveryCost(calculationData?.delivery.sum);
+      setDeliveryComment(calculationData?.delivery.comment);
+      setDesignName(calculationData?.design.title);
+      setDesignCost(calculationData?.design.sum);
+      setDesignComment(calculationData?.design.comment);
+      setSelectName(calculationData?.branding.title);
+      setSelectCost(calculationData?.branding.sum);
+      setSelectComment(calculationData?.branding.comment);
+      if (calculationData?.aditionalRows) {
+        setRows(
+          calculationData.aditionalRows.map((row) => ({
+            title: row.title,
+            sum: row.sum,
+            comment: row.comment,
+          }))
         );
-        setCalculationData(response.data);
-      } catch (error) {
-        console.error("Error fetching calculation data:", error);
       }
+      setPriceMarkUp(calculationData?.markUp);
+      setPricePerPie(calculationData?.priceForOne);
+      setSum(calculationData?.salesAmountWithMarkup);
+      setCostAmount(calculationData?.costPrice);
+      setMargin(calculationData?.margin);
+      setPriceFackt(calculationData?.salePrice);
+      setCurrentClient(calculationData?.clientId)
+      setClientId(calculationData?.clientId?._id);
+      setClientName(calculationData?.clientId?.fullName);
+      setClientCompany(calculationData?.clientId?.company);
+      setClientMail(calculationData?.clientId?.email);
+      setClientPhone(calculationData?.clientId?.phone);
+    }, [calculationData]);
+
+  
+    const handleAddRow = () => {
+      setRows([
+        ...rows,
+        {
+          title: "",
+          sum: null,
+          comment: "",
+        },
+      ]);
+    };
+  
+    const handleInputChange = (e, rowIndex, field) => {
+      const updatedRows = [...rows];
+      updatedRows[rowIndex][field] = e.target.value;
+      setRows(updatedRows);
+    };
+  
+    useEffect(() => {
+      const rowsCostTotal = rows.reduce((acc, row) => {
+        return acc + (Number(row.productCost) || 0);
+      }, 0);
+  
+      setCostAmount(
+        Number(productCost) +
+          Number(deliveryCost) +
+          Number(designCost) +
+          Number(selectCost) +
+          Number(rowsCostTotal)
+      );
+    }, [productCost, deliveryCost, designCost, selectCost, rows]);
+  
+    useEffect(() => {
+      if (costAmount && priceMarkUp !== null && count > 0) {
+        const markUpAmount = costAmount * (priceMarkUp / 100);
+        const totalPrice = costAmount + markUpAmount;
+        const pricePerPieceWithMarkup = totalPrice / count;
+        const sumWithMarg = costAmount + markUpAmount;
+  
+        setPricePerPie(pricePerPieceWithMarkup.toFixed(2));
+        setSum(sumWithMarg);
+        if(priceFackt){
+          const sum = (priceFackt-costAmount)
+          setMargin(sum.toFixed(2))
+      } else {
+          const sum = (sumWithMarg-costAmount)
+          setMargin(sum.toFixed(2))
+      }
+      }
+    }, [costAmount, priceMarkUp, count, sumMargin, priceFackt]);
+  
+
+  
+    const resetData = () => {
+      setCurrentClient(null);
+      setClientName("");
+      setClientCompany("");
+      setClientMail("");
+      setClientPhone("");
     };
 
-    fetchCalculationData();
-  }, [id]);
-
-  useEffect(() => {
-    setNameOrder(calculationData?.orderName);
-    setCount(calculationData?.counts);
-    setProductName(calculationData?.productName.title);
-    setProductCost(calculationData?.productName.sum);
-    setProductComment(calculationData?.productName.comment);
-    setDeliveryName(calculationData?.delivery.title);
-    setDeliveryCost(calculationData?.delivery.sum);
-    setDeliveryComment(calculationData?.delivery.comment);
-    setDesignName(calculationData?.design.title);
-    setDesignCost(calculationData?.design.sum);
-    setDesignComment(calculationData?.design.comment);
-    setSelectName(calculationData?.branding.title);
-    setSelectCost(calculationData?.branding.sum);
-    setSelectComment(calculationData?.branding.comment);
-    if (calculationData?.aditionalRows) {
-      setRows(
-        calculationData.aditionalRows.map((row) => ({
-          title: row.title,
-          sum: row.sum,
-          comment: row.comment,
-        }))
-      );
-    }
-    setPriceMarkUp(calculationData?.markUp);
-    setPricePerPie(calculationData?.priceForOne);
-    setSum(calculationData?.salesAmountWithMarkup);
-    setCostAmount(calculationData?.costPrice);
-    setMargin(calculationData?.margin);
-    setPriceFackt(calculationData?.salePrice);
-    setCurrentClient(calculationData?.clientId)
-    setClientId(calculationData?.clientId);
-    setClientName(calculationData?.clientId?.fullName);
-    setClientCompany(calculationData?.clientId?.company);
-    setClientMail(calculationData?.clientId?.email);
-    setClientPhone(calculationData?.clientId?.phone);
-  }, [calculationData]);
-
-  
-
-  const handleAddRow = () => {
-    setRows([
-      ...rows,
-      {
-        title: "",
-        sum: null,
-        comment: "",
-      },
-    ]);
-  };
-
-  const handleInputChange = (e, rowIndex, field) => {
-    const updatedRows = [...rows];
-    updatedRows[rowIndex][field] = e.target.value;
-    setRows(updatedRows);
-  };
-
-  useEffect(() => {
-    const rowsCostTotal = rows.reduce((acc, row) => {
-      return acc + (Number(row.productCost) || 0);
-    }, 0);
-
-    setCostAmount(
-      Number(productCost) +
-        Number(deliveryCost) +
-        Number(designCost) +
-        Number(selectCost) +
-        Number(rowsCostTotal)
-    );
-  }, [productCost, deliveryCost, designCost, selectCost, rows]);
-
-  useEffect(() => {
-    if (costAmount && priceMarkUp !== null && count > 0) {
-      const markUpAmount = costAmount * (priceMarkUp / 100);
-      const totalPrice = costAmount + markUpAmount;
-      const pricePerPieceWithMarkup = totalPrice / count;
-      const sumWithMarg = costAmount + markUpAmount;
-
-      setPricePerPie(pricePerPieceWithMarkup.toFixed(2));
-      setSum(sumWithMarg);
-      if(priceFackt){
-        const sum = (priceFackt-costAmount)
-        setMargin(sum.toFixed(2))
-    } else {
-        const sum = (sumWithMarg-costAmount)
-        setMargin(sum.toFixed(2))
-    }
-    }
-  }, [costAmount, priceMarkUp, count, sumMargin, priceFackt]);
-
-  const validateFormData = () => {
-    let errorMessage = '';
-    if (!clientName.trim()) errorMessage = 'Будь ласка, вкажіть ПІБ.';
-    else if (!clientCompany.trim()) errorMessage = 'Будь ласка, вкажіть компанію.';
-    else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(clientMail)) errorMessage = 'Будь ласка, вкажіть коректну пошту.';
-    else if (!/^\+?(\d.*){10,}$/g.test(clientPhone)) errorMessage = 'Будь ласка, вкажіть коректний номер телефона.';
-  
-    return errorMessage;
-  };
-
-
-  const handleCreateUser = async () => {
-    const errorMessage = validateFormData();
-    if (errorMessage) {
-      alert(errorMessage); // Показати помилку валідації
-      return;
-    }
-  
-    setIsButtonDisabled(true); // Відключити кнопку
-    try {
-      const response = await axios.post(`${BASE_URL}/create-client`, {
-        fullName: clientName,
-        company: clientCompany,
-        email: clientMail,
-        phone: clientPhone,
-      });
-      console.log("Create response:", response);
-      alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
-    } catch (error) {
-      console.error("Error updating client:", error);
-      alert('Виникла помилка при збереженні клієнта.'); // Показати повідомлення про помилку
-    } finally {
-      setIsButtonDisabled(false); // Включити кнопку
-    }
-  };
-
-  const resetData = () => {
-    setCurrentClient(null);
-    setClientName("");
-    setClientCompany("");
-    setClientMail("");
-    setClientPhone("");
-  };
-
-
-  const validateMarkupForm = () => {
-    const markupValue = parseFloat(priceMarkUp);
-    if (isNaN(markupValue) || markupValue <= 0) {
-      alert("Заповніть поле - Націнка");
-      return false;
-    }
-    return true;
-  };
-
-
-  const handleSave = async () => {
-    if (!validateMarkupForm()) return; // Зупинити виконання, якщо валідація не пройдена
-    setIsSubmitting(true); // Відключити кнопку
-
-    try {
-      const dataToSend = {
-        id: id,
-        clientId: currentClient,
-        orderName: nameOrder,
-        counts: count,
-        productName: {
-          title: productName,
-          sum: productCost,
-          comment: productComment,
-        },
-        delivery: {
-          title: deliveryName,
-          sum: deliveryCost,
-          comment: deliveryComment,
-        },
-        design: {
-          title: designName,
-          sum: designCost,
-          comment: designComment,
-        },
-        branding: {
-          title: selectName,
-          sum: selectCost,
-          comment: selectComment,
-        },
-        aditionalRows: rows.map((row) => ({
-          title: row.title,
-          sum: row.sum,
-          comment: row.comment,
-        })),
-        markUp: priceMarkUp,
-        priceForOne: pricePerPie,
-        salesAmountWithMarkup: sum,
-        costPrice: costAmount,
-        margin: sumMargin,
-        salePrice: priceFackt,
-      };
-
-      const response = await axios.patch(
-        `${BASE_URL}/update-calculation`,
-        dataToSend
-      );
-      console.log("Response from backend:", response);
-      if (response.status === 200) {
-        alert("Прорахунок збережений");
-        window.location.reload()
+    const validateMarkupForm = () => {
+      const markupValue = parseFloat(priceMarkUp);
+      if (isNaN(markupValue) || markupValue <= 0) {
+        alert("Заповніть поле - Націнка");
+        return false;
       }
-      setIsSubmitting(false);
-    } catch (error) {
-      console.error("Error saving data:", error);
-      setIsSubmitting(false);
-    }
-  };
+      return true;
+    };
+  
+    const handleSave = async () => {
+      if (!validateMarkupForm()) return; // Зупинити виконання, якщо валідація не пройдена
+      setIsSubmitting(true); // Відключити кнопку
 
+      try {
+        const dataToSend = {
+          id: id,
+          clientId: currentClient,
+          orderName: nameOrder,
+          counts: count,
+          productName: {
+            title: productName,
+            sum: productCost,
+            comment: productComment,
+          },
+          delivery: {
+            title: deliveryName,
+            sum: deliveryCost,
+            comment: deliveryComment,
+          },
+          design: {
+            title: designName,
+            sum: designCost,
+            comment: designComment,
+          },
+          branding: {
+            title: selectName,
+            sum: selectCost,
+            comment: selectComment,
+          },
+          aditionalRows: rows.map((row) => ({
+            title: row.title,
+            sum: row.sum,
+            comment: row.comment,
+          })),
+          markUp: priceMarkUp,
+          priceForOne: pricePerPie,
+          salesAmountWithMarkup: sum,
+          costPrice: costAmount,
+          margin: sumMargin,
+          salePrice: priceFackt,
+        };
+  
+        const response = await axios.post(
+          `${BASE_URL}/create-calculation`,
+          dataToSend
+        );
+        console.log("Response from backend:", response);
+        if (response.status === 200) {
+          alert("Прорахунок збережений");
+          window.location.reload()
+        }
+        setIsSubmitting(false);
+      } catch (error) {
+        console.error("Error saving data:", error);
+        setIsSubmitting(false);
+      }
+    };
+  
 
-  console.log('calculationData', calculationData);
+    const validateFormData = () => {
+      let errorMessage = '';
+      if (!clientName.trim()) errorMessage = 'Будь ласка, вкажіть ПІБ.';
+      else if (!clientCompany.trim()) errorMessage = 'Будь ласка, вкажіть компанію.';
+      else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(clientMail)) errorMessage = 'Будь ласка, вкажіть коректну пошту.';
+      else if (!/^\+?(\d.*){10,}$/g.test(clientPhone)) errorMessage = 'Будь ласка, вкажіть коректний номер телефона.';
+    
+      return errorMessage;
+    };
+  
 
-
-  return (
-    <div className="calculator_wrap">
+    const handleCreateUser = async () => {
+      const errorMessage = validateFormData();
+      if (errorMessage) {
+        alert(errorMessage); // Показати помилку валідації
+        return;
+      }
+    
+      setIsButtonDisabled(true); // Відключити кнопку
+      try {
+        const response = await axios.post(`${BASE_URL}/create-client`, {
+          fullName: clientName,
+          company: clientCompany,
+          email: clientMail,
+          phone: clientPhone,
+        });
+        console.log("Create response:", response);
+        alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
+      } catch (error) {
+        console.error("Error updating client:", error);
+        alert('Виникла помилка при збереженні клієнта.'); // Показати повідомлення про помилку
+      } finally {
+        setIsButtonDisabled(false); // Включити кнопку
+      }
+    };
+  
+    return (
+<div className="calculator_wrap">
       <div className="calculator_chose_client_block">
         <div className="client_block_select">
           <button className="btn_choose_client" onClick={() => setIsOpen(true)}>
@@ -309,8 +303,8 @@ const EditMiscalculation = () => {
             value={currentClient ? currentClient.phone : clientPhone}
             onChange={(e) => setClientPhone(e.target.value)}
           />
+           {/* <button onClick={handleCreateUser} >Зберегти клієнта</button> */}
             <button onClick={handleCreateUser} disabled={isButtonDisabled}>Зберегти клієнта</button>
-
           <button className="btn_resr_data" onClick={resetData}>
             Скинути дані клієнта
           </button>
@@ -590,7 +584,7 @@ const EditMiscalculation = () => {
         </button>
       </div>
     </div>
-  );
+    );
 };
 
-export default EditMiscalculation;
+export default CopiMiscalculation;
