@@ -47,6 +47,7 @@ const TableItemAdmin = ({ data, selectType }) => {
         return [r, g, b];
     }
 
+    console.log('data', data);
 
     return (
         <div className='table_item_wrap'>
@@ -62,7 +63,7 @@ const TableItemAdmin = ({ data, selectType }) => {
         backgroundColor: data?.managerId?.color,
         color: isLightColor(data?.managerId?.color) ? 'black' : 'white'
     }}>{data?.managerId?.login} </p></div>
-            <p className='table_header_item table_item'>{data.productName.title}</p>
+            <p className='table_header_item table_item'>{data.orderName}</p>
             <p className='table_header_item table_item'>{data.salePrice}</p>
             <p className='table_header_item table_item'>{data.costPrice}</p>
             <p className='table_header_item table_item'>{data.margin}</p>

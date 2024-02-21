@@ -41,6 +41,8 @@ const EditOrder = () => {
     const [sumMargin, setMargin] = useState(null);
     const [priceFackt, setPriceFackt] = useState(null);
     const [rows, setRows] = useState([]);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
   
     useEffect(() => {
       const fetchCalculationData = async () => {
@@ -87,13 +89,14 @@ const EditOrder = () => {
       setCostAmount(calculationData?.costPrice);
       setMargin(calculationData?.margin);
       setPriceFackt(calculationData?.salePrice);
-  
+      setCurrentClient(calculationData?.clientId)
       setClientId(calculationData?.clientId?._id);
       setClientName(calculationData?.clientId?.fullName);
       setClientCompany(calculationData?.clientId?.company);
       setClientMail(calculationData?.clientId?.email);
       setClientPhone(calculationData?.clientId?.phone);
     }, [calculationData]);
+
   
     const handleAddRow = () => {
       setRows([
@@ -145,19 +148,7 @@ const EditOrder = () => {
       }
     }, [costAmount, priceMarkUp, count, sumMargin, priceFackt]);
   
-    const handleCreateUser = async () => {
-      try {
-        const response = await axios.post(`${BASE_URL}/create-client`, {
-          fullName: clientName,
-          company: clientCompany,
-          email: clientMail,
-          phone: clientPhone,
-        });
-        console.log("Create response:", response);
-      } catch (error) {
-        console.error("Error updating client:", error);
-      }
-    };
+
   
     const resetData = () => {
       setCurrentClient(null);
@@ -166,8 +157,20 @@ const EditOrder = () => {
       setClientMail("");
       setClientPhone("");
     };
+
+    const validateMarkupForm = () => {
+      const markupValue = parseFloat(priceMarkUp);
+      if (isNaN(markupValue) || markupValue <= 0) {
+        alert("Заповніть поле - Націнка");
+        return false;
+      }
+      return true;
+    };
   
     const handleSave = async () => {
+      if (!validateMarkupForm()) return; // Зупинити виконання, якщо валідація не пройдена
+      setIsSubmitting(true); // Відключити кнопку
+
       try {
         const dataToSend = {
           id: id,
@@ -216,12 +219,49 @@ const EditOrder = () => {
           alert("Прорахунок збережений");
           window.location.reload()
         }
+        setIsSubmitting(false);
       } catch (error) {
         console.error("Error saving data:", error);
+        setIsSubmitting(false);
       }
     };
   
+
+    const validateFormData = () => {
+      let errorMessage = '';
+      if (!clientName.trim()) errorMessage = 'Будь ласка, вкажіть ПІБ.';
+      else if (!clientCompany.trim()) errorMessage = 'Будь ласка, вкажіть компанію.';
+      else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(clientMail)) errorMessage = 'Будь ласка, вкажіть коректну пошту.';
+      else if (!/^\+?(\d.*){10,}$/g.test(clientPhone)) errorMessage = 'Будь ласка, вкажіть коректний номер телефона.';
+    
+      return errorMessage;
+    };
   
+
+    const handleCreateUser = async () => {
+      const errorMessage = validateFormData();
+      if (errorMessage) {
+        alert(errorMessage); // Показати помилку валідації
+        return;
+      }
+    
+      setIsButtonDisabled(true); // Відключити кнопку
+      try {
+        const response = await axios.post(`${BASE_URL}/create-client`, {
+          fullName: clientName,
+          company: clientCompany,
+          email: clientMail,
+          phone: clientPhone,
+        });
+        console.log("Create response:", response);
+        alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
+      } catch (error) {
+        console.error("Error updating client:", error);
+        alert('Виникла помилка при збереженні клієнта.'); // Показати повідомлення про помилку
+      } finally {
+        setIsButtonDisabled(false); // Включити кнопку
+      }
+    };
   
     return (
 <div className="calculator_wrap">
@@ -237,7 +277,7 @@ const EditOrder = () => {
               setCurrentClient={setCurrentClient}
             />
           )}
-          <button onClick={handleCreateUser} ><FaPlus/></button>
+          {/* <button onClick={handleCreateUser} ><FaPlus/></button> */}
         </div>
         <div className="client_block_curent">
           <input
@@ -264,6 +304,8 @@ const EditOrder = () => {
             value={currentClient ? currentClient.phone : clientPhone}
             onChange={(e) => setClientPhone(e.target.value)}
           />
+           {/* <button onClick={handleCreateUser} >Зберегти клієнта</button> */}
+            <button onClick={handleCreateUser} disabled={isButtonDisabled}>Зберегти клієнта</button>
           <button className="btn_resr_data" onClick={resetData}>
             Скинути дані клієнта
           </button>
@@ -326,6 +368,7 @@ const EditOrder = () => {
               name="select_desing"
               id=""
               placeholder="Брендування"
+              value={selectName}
               onChange={(e) => setSelectName(e.target.value)}
             >
               <option value="Без брендування">Без брендування</option>
@@ -537,7 +580,7 @@ const EditOrder = () => {
             <Link to={`/manager-panel`}>Відмінити</Link>
           )}
         </button>
-        <button className="btn_prime" onClick={handleSave}>
+        <button disabled={isSubmitting} className="btn_prime" onClick={handleSave}>
           Зберегти
         </button>
       </div>
