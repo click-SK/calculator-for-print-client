@@ -14,7 +14,7 @@ const TableItem = ({ data, selectType }) => {
             <p className='table_header_item_id table_item'>{data?.id}</p>
             <p className='table_header_item table_item'>{data.orderName}</p>
             <p className='table_header_item table_item'>{data.salePrice}</p>
-            <p className='table_header_item table_item'>{data.costPrice}</p>
+            <p className='table_header_item table_item'>{data.priceForOne}</p>
             <p className='table_header_item table_item'>{data.margin}</p>
             <div className='table_header_item table_item'>
                 {selectType == 'action'

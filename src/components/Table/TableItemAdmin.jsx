@@ -47,8 +47,6 @@ const TableItemAdmin = ({ data, selectType }) => {
         return [r, g, b];
     }
 
-    console.log('data', data);
-
     return (
         <div className='table_item_wrap'>
             <p className='table_item edit_icon'>

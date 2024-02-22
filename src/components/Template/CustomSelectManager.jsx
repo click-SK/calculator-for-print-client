@@ -15,8 +15,7 @@ const CustomSelectManager = ({currentStatus, setCurrentStatus}) => {
         try {
             axios.get(`${BASE_URL}/get-all-managers`)
                 .then(response => {
-                    console.log('Server response:', response);
-                    // setListUser(response.data);
+
                     setListUser([{ _id: 1, login: 'Всі' }, ...response.data]);
                 })
                 .catch(error => {

@@ -11,7 +11,6 @@ import { FaPlus } from "react-icons/fa6";
 const MainPage = () => {
     const user = useSelector((state) => state.auth.data);
     const [activeTab, setActiveTab] = useState('Прорахунки');
-    console.log('activeTab',activeTab);
     return (
         <>
             <NavigationPalnel

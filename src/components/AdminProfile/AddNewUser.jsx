@@ -18,7 +18,6 @@ const AddNewUser = ({setIsOpen}) => {
                 color: color,
             };
             const response = await axios.post(`${BASE_URL}/register`, newUser);
-            console.log('Server response:', response.data);
 
             setIsOpen(false);
         } catch (error) {

@@ -61,7 +61,7 @@
         background: transparent;
         padding: 5px 10px;
         font-size: 30px;
-        color: $orange_color;
+        color: $dark_color;
     }
 
     .btn_resr_data{
@@ -228,7 +228,7 @@
 .calculator_bottom_block_item{
     position: relative;
     input{
-
+        color: $dark_color;
     }
     label{
         position: absolute;

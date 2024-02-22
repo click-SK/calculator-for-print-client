@@ -20,7 +20,6 @@ const AdminProfileSetings = () => {
         try {
             axios.get(`${BASE_URL}/get-all-managers`)
                 .then(response => {
-                    // console.log('Server response:', response);
                     setListUser(response.data);
                 })
                 .catch(error => {

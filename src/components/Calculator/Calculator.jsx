@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from '../../http/BaseUrl';
 import { FaPlus } from "react-icons/fa6";
-
+import Preloader from '../Preloader/Preloader';
 const Calculator = ({setActiveTab}) => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.data);
@@ -112,7 +112,6 @@ const Calculator = ({setActiveTab}) => {
             email: clientMail,
             phone: clientPhone,
           });
-          console.log("Create response:", response);
           alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
         } catch (error) {
           console.error("Error updating client:", error);
@@ -183,9 +182,8 @@ const Calculator = ({setActiveTab}) => {
                 salePrice:priceFackt
             };
     
-            // console.log('Response from backend2:', dataToSend);
             const response = await axios.post(`${BASE_URL}/create-calculation`, dataToSend);
-            console.log('Response from backend:', response.data);
+
             if(response.status === 200){
                 alert('Прорахунок збережений')
                 window.location.reload()
