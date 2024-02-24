@@ -88,10 +88,11 @@ const Calculator = ({setActiveTab}) => {
 
     const validateFormData = () => {
         let errorMessage = '';
-        if (!clientName.trim()) errorMessage = 'Будь ласка, вкажіть ПІБ.';
-        else if (!clientCompany.trim()) errorMessage = 'Будь ласка, вкажіть компанію.';
-        else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(clientMail)) errorMessage = 'Будь ласка, вкажіть коректну пошту.';
-        else if (!/^\+?(\d.*){10,}$/g.test(clientPhone)) errorMessage = 'Будь ласка, вкажіть коректний номер телефона.';
+        if(!clientName && !clientCompany && !clientMail && !clientPhone) errorMessage = 'Всі поля пусті';
+        // if (!clientName.trim()) errorMessage = 'Будь ласка, вкажіть ПІБ.';
+        // else if (!clientCompany.trim()) errorMessage = 'Будь ласка, вкажіть компанію.';
+        // else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(clientMail)) errorMessage = 'Будь ласка, вкажіть коректну пошту.';
+        // else if (!/^\+?(\d.*){10,}$/g.test(clientPhone)) errorMessage = 'Будь ласка, вкажіть коректний номер телефона.';
       
         return errorMessage;
       };
@@ -113,6 +114,7 @@ const Calculator = ({setActiveTab}) => {
             phone: clientPhone,
           });
           alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
+          resetData();
         } catch (error) {
           console.error("Error updating client:", error);
           alert('Виникла помилка при збереженні клієнта.'); // Показати повідомлення про помилку
