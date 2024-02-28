@@ -11,8 +11,8 @@ const TableItem = ({ data, selectType }) => {
     return (
         <div className='table_item_wrap'>
             <p className='table_header_item_id table_item'>{data?.id}</p>
-            <p className='table_header_item table_item'>{data.orderName}</p>
             <p className='table_header_item table_item'>{data?.clientId[0]?.company}</p>
+            <p className='table_header_item table_item'>{data.orderName}</p>
             <p className='table_header_item table_item'>{data.salePrice}</p>
             <p className='table_header_item table_item'>{data.priceForOne}</p>
             <p className='table_header_item table_item'>{data.margin}</p>

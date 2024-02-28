@@ -12,8 +12,8 @@ const TableHeader = ({style, optionStatus, setOptionStatus, isOrder}) => {
     return (
         <div className='table_header_wrap'>
             <p className='table_header_item_id header_item'>№</p>
-            <p className='table_header_item header_item'>Назва</p>
             <p className='table_header_item header_item'>Клієнт</p>
+            <p className='table_header_item header_item'>Назва</p>
             <p className='table_header_item header_item'>Ціна факт</p>
             {isOrder
             ?

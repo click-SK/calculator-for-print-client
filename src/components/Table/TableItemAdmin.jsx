@@ -60,8 +60,8 @@ const TableItemAdmin = ({ data, selectType }) => {
         backgroundColor: data?.managerId?.color,
         color: isLightColor(data?.managerId?.color) ? 'black' : 'white'
     }}>{data?.managerId?.login} </p></div>
-            <p className='table_header_item table_item'>{data.orderName}</p>
             <p className='table_header_item table_item'>{data?.clientId?.company}</p>
+            <p className='table_header_item table_item'>{data.orderName}</p>
             <p className='table_header_item table_item'>{data.salePrice}</p>
             <p className='table_header_item table_item'>{data.costPrice}</p>
             <p className='table_header_item table_item'>{data.margin}</p>
