@@ -14,7 +14,6 @@ const TableItemAdmin = ({ data, selectType }) => {
     const user = useSelector((state) => state.auth.data);
     const [currentStatus, setCurrentStatus] = useState(data?.status)
 
-
     const hendlerUpdateStatus = (newStatus) => {
         axios.patch(`${BASE_URL}/update-order-status`, { id: data._id, status: newStatus })
             .then(response => {
@@ -62,6 +61,7 @@ const TableItemAdmin = ({ data, selectType }) => {
         color: isLightColor(data?.managerId?.color) ? 'black' : 'white'
     }}>{data?.managerId?.login} </p></div>
             <p className='table_header_item table_item'>{data.orderName}</p>
+            <p className='table_header_item table_item'>{data?.clientId?.company}</p>
             <p className='table_header_item table_item'>{data.salePrice}</p>
             <p className='table_header_item table_item'>{data.costPrice}</p>
             <p className='table_header_item table_item'>{data.margin}</p>
