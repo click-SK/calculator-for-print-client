@@ -34,7 +34,7 @@ const Orders = () => {
                         search: searchQuery,
                     },
                 });
-                console.log('response', response);
+
                 setOrdersArray(response.data.list);
                 setTotalOrders(response.data.pagination.pageCount);
             } else {
@@ -45,7 +45,7 @@ const Orders = () => {
                         manager: user._id,
                     },
                 });
-                console.log('response', response);
+
                 setOrdersArray(response.data?.list);
                 setTotalOrders(response.data?.pagination?.pageCount);
             }
@@ -71,7 +71,7 @@ const Orders = () => {
                         
                     },
                 });
-                console.log('response', response);
+
                 setOrdersArray(response.data?.list);
                 setTotalOrders(response.data?.pagination?.pageCount);
             }else {
@@ -83,7 +83,7 @@ const Orders = () => {
                         managerId: user._id
                     },
                 });
-                console.log('response222', response);
+
                 setOrdersArray(response.data?.list);
                 setTotalOrders(response.data?.pagination?.pageCount);
             }
@@ -101,7 +101,7 @@ const Orders = () => {
                     manager: optionManager,
                 },
             });
-            // console.log('response', response);
+
             setOrdersArray(response.data?.list);
             setTotalOrders(response.data?.pagination?.pageCount);
         } catch (error) {
@@ -152,6 +152,7 @@ const Orders = () => {
             setOptionStatus={setOptionStatus}
             optionStatus={optionStatus}
             optionManager={optionManager}
+            isOrder={true}
             setOptionManager={setOptionManager}
             />
             {ordersArray.map((item) => (

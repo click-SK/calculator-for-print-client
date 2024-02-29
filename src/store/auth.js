@@ -30,7 +30,6 @@ export const fetchAuth = createAsyncThunk(
   export const fetchAuthMe = createAsyncThunk("auth/fetchAuthMe", async (payload, thunkAPI) => {
     const response = await fetch(`${BASE_URL}/get-me/${AUTH_TOKEN}`);
     const data = await response.json();
-    console.log('me data',data);
     if(!data.login) {
         window.localStorage.removeItem('S-F-P-token');
     } else {

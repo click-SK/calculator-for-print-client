@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from '../../http/BaseUrl';
 import { FaPlus } from "react-icons/fa6";
-
+import Preloader from '../Preloader/Preloader';
 const Calculator = ({setActiveTab}) => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.data);
@@ -88,10 +88,11 @@ const Calculator = ({setActiveTab}) => {
 
     const validateFormData = () => {
         let errorMessage = '';
-        if (!clientName.trim()) errorMessage = 'Будь ласка, вкажіть ПІБ.';
-        else if (!clientCompany.trim()) errorMessage = 'Будь ласка, вкажіть компанію.';
-        else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(clientMail)) errorMessage = 'Будь ласка, вкажіть коректну пошту.';
-        else if (!/^\+?(\d.*){10,}$/g.test(clientPhone)) errorMessage = 'Будь ласка, вкажіть коректний номер телефона.';
+        if(!clientName && !clientCompany && !clientMail && !clientPhone) errorMessage = 'Всі поля пусті';
+        // if (!clientName.trim()) errorMessage = 'Будь ласка, вкажіть ПІБ.';
+        // else if (!clientCompany.trim()) errorMessage = 'Будь ласка, вкажіть компанію.';
+        // else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(clientMail)) errorMessage = 'Будь ласка, вкажіть коректну пошту.';
+        // else if (!/^\+?(\d.*){10,}$/g.test(clientPhone)) errorMessage = 'Будь ласка, вкажіть коректний номер телефона.';
       
         return errorMessage;
       };
@@ -112,8 +113,8 @@ const Calculator = ({setActiveTab}) => {
             email: clientMail,
             phone: clientPhone,
           });
-          console.log("Create response:", response);
           alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
+          resetData();
         } catch (error) {
           console.error("Error updating client:", error);
           alert('Виникла помилка при збереженні клієнта.'); // Показати повідомлення про помилку
@@ -183,9 +184,8 @@ const Calculator = ({setActiveTab}) => {
                 salePrice:priceFackt
             };
     
-            // console.log('Response from backend2:', dataToSend);
             const response = await axios.post(`${BASE_URL}/create-calculation`, dataToSend);
-            console.log('Response from backend:', response.data);
+
             if(response.status === 200){
                 alert('Прорахунок збережений')
                 window.location.reload()

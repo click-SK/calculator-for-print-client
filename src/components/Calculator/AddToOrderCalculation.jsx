@@ -173,7 +173,6 @@ const AddToOrderCalculation = () => {
           email: clientMail,
           phone: clientPhone,
         });
-        console.log("Create response:", response);
         alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
       } catch (error) {
         console.error("Error updating client:", error);
@@ -190,9 +189,6 @@ const AddToOrderCalculation = () => {
       setClientMail("");
       setClientPhone("");
     };
-
-    console.log('clientId', currentClient);
-    console.log('user._id', user._id);
 
     const validateMarkupForm = () => {
       const markupValue = parseFloat(priceMarkUp);
@@ -251,7 +247,7 @@ const AddToOrderCalculation = () => {
           `${BASE_URL}/create-order`,
           dataToSend
         );
-        console.log("Response from backend:", response);
+
         if (response.status === 200) {
           alert("Замовлення доданно");
           window.location.reload()

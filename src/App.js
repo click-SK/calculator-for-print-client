@@ -9,6 +9,7 @@ import './style/CustomSelect.scss';
 import './style/Calculator.scss';
 import './style/Pagination.scss';
 import './style/SearchQuery.scss';
+import './style/preloader.scss';
 import Login from './components/Authorization/Login';
 import FirstRequest from './components/FirstRequest';
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -32,9 +33,10 @@ function App() {
       navigate("/admin-panel");
     } else if (user && user?.isAdmin == false ) {
       navigate("/manager-panel");
-    } else if (!user) {
-      navigate("/");
-    }
+    } 
+    // else if (!user) {
+    //   navigate("/");
+    // }
   },[user])
 
   const handleLogout = () => {
@@ -43,16 +45,13 @@ function App() {
     navigate("/");
   };
 
-  console.log('user',user);
   return (
     <div className="App">
       <FirstRequest/>
       <Routes>
       <Route path="*" element={<Page404 />} />
         {!user && <Route path="/" element={<Login/>} />}
-        {/* {user?.login && (
-          <Route path="/admin-panel" element={<MainPage />} />
-        )} */}
+
         {user?.isAdmin ? 
           <Route path="/admin-panel" element={<MainPage />} />
           :
@@ -71,9 +70,11 @@ function App() {
           <Route path="/copy-calculation/:id" element={<CopiMiscalculation />} />
         )}
       </Routes>
+      {user && 
       <div className='log_out_btn_wrap'>
         <button onClick={handleLogout}>Вийти</button>
       </div>
+      }
     </div>
   );
 }

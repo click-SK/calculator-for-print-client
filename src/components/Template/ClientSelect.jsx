@@ -25,7 +25,7 @@ const ClientSelect = ({ setIsOpen, currentClient, setCurrentClient }) => {
                 }
             })
                 .then(response => {
-                    console.log('Server response:', response);
+
                     setClients(response.data.list);
                 })
                 .catch(error => {
@@ -58,7 +58,6 @@ const ClientSelect = ({ setIsOpen, currentClient, setCurrentClient }) => {
                 phone: clientToUpdate.phone,
             });
     
-            console.log('Update response:', response);
             setEditClientId(null); 
         } catch (error) {
             console.error('Error updating client:', error);

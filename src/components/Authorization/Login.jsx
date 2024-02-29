@@ -19,8 +19,6 @@ const Login = () => {
             })
         );
 
-        console.log('data', data);
-
         if (data.payload && data.payload.login) {
             window.localStorage.setItem("S-F-P-token", data.payload.login);
             window.location.reload();

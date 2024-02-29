@@ -213,7 +213,7 @@ const CopiMiscalculation = () => {
           `${BASE_URL}/create-calculation`,
           dataToSend
         );
-        console.log("Response from backend:", response);
+
         if (response.status === 200) {
           alert("Прорахунок збережений");
           window.location.reload()
@@ -252,7 +252,7 @@ const CopiMiscalculation = () => {
           email: clientMail,
           phone: clientPhone,
         });
-        console.log("Create response:", response);
+
         alert('Клієнта успішно збережено!'); // Показати повідомлення про успіх
       } catch (error) {
         console.error("Error updating client:", error);
