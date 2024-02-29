@@ -116,7 +116,7 @@ const CopiMiscalculation = () => {
   
     useEffect(() => {
       const rowsCostTotal = rows.reduce((acc, row) => {
-        return acc + (Number(row.productCost) || 0);
+        return acc + (Number(row.sum) || 0);
       }, 0);
   
       setCostAmount(
@@ -377,6 +377,9 @@ const CopiMiscalculation = () => {
               <option value="Гравіювання">Гравіювання</option>
               <option value="ДТФ">ДТФ</option>
               <option value="Термоперенос">Термоперенос</option>
+                <option value="Тиснення сліпе">Тиснення сліпе</option>
+                <option value="Тиснення фольга">Тиснення фольга</option>
+                <option value="Вишивка">Вишивка</option>
             </select>
             <input
               className="calculator_body_row_item"

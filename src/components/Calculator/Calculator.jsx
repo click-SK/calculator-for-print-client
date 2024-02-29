@@ -58,7 +58,7 @@ const Calculator = ({setActiveTab}) => {
 
     useEffect(() => {
         const rowsCostTotal = rows.reduce((acc, row) => {
-            return acc + (Number(row.productCost) || 0);
+            return acc + (Number(row.sum) || 0);
         }, 0);
 
         setCostAmount(Number(productCost) + Number(deliveryCost) + Number(designCost) + Number(selectCost) + Number(rowsCostTotal))
@@ -141,6 +141,7 @@ const Calculator = ({setActiveTab}) => {
         return true;
       };
 
+    console.log('rows', rows);
 
     const handleSave = async () => {
         if (!validateMarkupForm()) return; // Зупинити виконання, якщо валідація не пройдена
@@ -246,6 +247,9 @@ const Calculator = ({setActiveTab}) => {
                             <option value="Гравіювання">Гравіювання</option>
                             <option value="ДТФ">ДТФ</option>
                             <option value="Термоперенос">Термоперенос</option>
+                            <option value="Тиснення сліпе">Тиснення сліпе</option>
+                            <option value="Тиснення фольга">Тиснення фольга</option>
+                            <option value="Вишивка">Вишивка</option>
                         </select>
                         <input className='calculator_body_row_item' type="number" onWheel={(e) => e.target.blur()} placeholder='сума' value={selectCost} onChange={(e) => setSelectCost(e.target.value)}/>
                         <textarea className='calculator_body_row_item' placeholder='Коментар' value={selectComment} onChange={(e) => setSelectComment(e.target.value)} cols="30" rows="10"></textarea>
